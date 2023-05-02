@@ -90,6 +90,10 @@ public boolean setUsername(String Username) {
     
     public boolean setPassword(String Password) {
         
+           
+           
+          // reference user for this code https://stackoverflow.com/questions/8107030/regular-expression-java 
+           
                String SpecialChars = "^(?=.*[a-z])(?=."
                        + "*[A-Z])(?=.*\\d)"
                        + "(?=.*[-+_!@#$%^&*., ?]).+$";
@@ -120,7 +124,7 @@ public boolean setUsername(String Username) {
            JOptionPane.showMessageDialog(null,"too short or missing characters"+
                      "\n"
                      + " password should contain numbers ,upper and lowercase and special characters  ");
-             
+             //output when falls an loops back to try again
                setPassword(Password);
                return false;
            
@@ -136,10 +140,12 @@ public boolean setUsername(String Username) {
   
                   JTextField user = new JTextField(10);
     JTextField Password = new JTextField(10);
-    
+    // creates the interface objects for username password input fields
     JPanel Confirm = new JPanel();
+           //main username input
  Confirm.add(new JLabel("Username"));
     Confirm.add(user);
+           // main password input
     Confirm.add(new JLabel("Password"));
     Confirm.add(Password);
     Confirm.add(Box.createHorizontalStrut(30)); // a spacer
@@ -153,6 +159,7 @@ public boolean setUsername(String Username) {
     if (result == JOptionPane.OK_OPTION) {
         
      String USER = user.getText();
+           
     String PASS = Password.getText();
     // the user input that is need for validation
     // check if password and username match in order to display final results
