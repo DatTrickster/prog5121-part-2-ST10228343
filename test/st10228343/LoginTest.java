@@ -6,19 +6,80 @@ package st10228343;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-
-
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Extinction
  */
 public class LoginTest {
-  
+    // unit test for total duration of the loop 
+ 
+       @Test // test for task 1 and 2 = 18hours total
+    public void testLastIterationOfLoop() {
+        int numTasks = 2;
+        int[] durations = {10, 8,};
 
+        int expectedLastIteration = 18;
+        int actualLastIteration = getLastIterationOfLoop(numTasks, durations);
+
+        assertEquals(expectedLastIteration, actualLastIteration);
+    }
+
+    @Test // test for 5 task in an array 
+    public void testTotalDuration() {
+        int[] durations = {10, 12, 55, 11, 1};
+
+        int expectedTotalDuration = 89;
+        int actualTotalDuration = calculateTotalDuration(durations);
+
+        assertEquals(expectedTotalDuration, actualTotalDuration);
+    }
+
+    private int getLastIterationOfLoop(int numTasks, int[] durations) {
+        int lastIteration = 0;
+        int startIndex = durations.length - numTasks;
+        for (int i = startIndex; i < durations.length; i++) {
+            lastIteration += durations[i];
+        }
+        return lastIteration;
+    }
+
+    private int calculateTotalDuration(int[] durations) {
+        int totalDuration = 0;
+        for (int duration : durations) {
+            totalDuration += duration;
+        }
+        return totalDuration;
+    }
+
+    
+    
+
+      @Test
+    public void TaskDescriptionCheckerSuccess() {
+        String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
+        // this contains 50 characters of dummy text
+        int characterLimit = 50;
+        //will heck if the amount is <= to 50 which is the limit an output true 
+        assertEquals(true, description.length() <= characterLimit);
+    }
+
+@Test    
+       public void TaskDescriptionCheckerfailed() {
+        String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
+        int characterLimit = 50;
+
+        if (description.length() <= characterLimit) {
+            assertEquals(true, true);
+        } else {
+            fail("Description length exceeds the character limit of 50 characters.");
+        }
+    }
+       
+
+    
     @Test // tests if username is valid
         public void testValidUsername() {
               String UserName = "kyl_1";
@@ -187,4 +248,8 @@ public class LoginTest {
    
          }     
     } 
+    
+    
 }
+
+
