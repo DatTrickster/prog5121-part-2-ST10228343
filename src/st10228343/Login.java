@@ -4,8 +4,6 @@
  */
 package st10228343;
 
- * @author Extinction
- */
 import java.util.regex.*;
 import javax.swing.Box;
 import javax.swing.JLabel;
