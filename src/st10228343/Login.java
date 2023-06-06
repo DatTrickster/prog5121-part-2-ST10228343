@@ -4,6 +4,8 @@
  */
 package st10228343;
 
+ * @author Extinction
+ */
 import java.util.regex.*;
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -317,23 +319,34 @@ public class Login {
                             }
                         }
 
-                        Object[] statusOptions = {"Done", "Doing", "To Do"};
-                        int statusChoice = JOptionPane.showOptionDialog(null,
-                                "Selet the status for the task",
-                                "Status",
-                                JOptionPane.DEFAULT_OPTION,
-                                JOptionPane.QUESTION_MESSAGE,
-                                null,
-                                statusOptions,
-                                statusOptions[0]);
+                       Object[] statusOptions = {"Done", "Doing", "To Do"};
+int statusChoice = JOptionPane.showOptionDialog(
+        null,
+        "Select the status for the task",
+        "Status",
+        JOptionPane.DEFAULT_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        null,
+        statusOptions,
+        statusOptions[0]
+);
 
-                        String status = switch (statusChoice) {
-                            case 0 -> "Done";
-                            case 1 -> "Doing";
-                            case 2 -> "To Do";
-                            default -> "To Do";
-                        };
+String status;
 
+                        switch (statusChoice) {
+                            case 0:
+                                status = "Done";
+                                break;
+                            case 1:
+                                status = "Doing";
+                                break;
+                            case 2:
+                                status = "To Do";
+                                break;
+                            default:
+                                status = "To Do";
+                                break;
+                        }
                         Person user = new Person(taskName, taskDescription, time, status, developerName);
                         userList.add(user);
                         System.out.println(userList);
@@ -362,6 +375,7 @@ public class Login {
                 case 1 : {
                     System.out.println("report currently in development");
                     JOptionPane.showMessageDialog(null, "Feature still in development");
+                    continue;
                 }
                 case 2 : {
                     System.out.println("program was ended");
