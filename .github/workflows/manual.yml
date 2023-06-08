@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: List contents
         run: ls
@@ -22,7 +21,6 @@ jobs:
         working-directory: ./src
         run: |
           javac -cp "../lib/junit-platform-console-standalone-1.6.0.jar" ./st10228343/ST10228343.java ./st10228343/Login.java ./st10228343/Tasks.java "../test/st10228343/LoginTest.java"
-
       - name: List contents of src directory after compile
         working-directory: ./src/st10228343
         run: ls
@@ -37,11 +35,10 @@ jobs:
           if [ ! -f "../../test/st10228343/LoginTest.class" ]; then
             cp LoginTest.class "../../test/st10228343/LoginTest.class"
           fi
-
       - name: List contents of test package
         working-directory: ./test/st10228343
         run: ls
 
       - name: Run LoginTest and generate report
         working-directory: ./test
-        run: java -jar "../lib/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class st10228343.LoginTest
+        run: java -cp "../lib/junit-platform-console-standalone-1.6.0.jar:." org.junit.platform.console.ConsoleLauncher --select-class st10228343.LoginTest
