@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package st10228343;
+
+
 /**
  *
  * @author Extinction
@@ -119,7 +121,7 @@ public class Login {
     JTextField Password = new JTextField(10);
     
     JPanel Confirm = new JPanel();
- Confirm.add(new JLabel("Username"));
+    Confirm.add(new JLabel("Username"));
     Confirm.add(user);
     Confirm.add(new JLabel("Password"));
     Confirm.add(Password);
