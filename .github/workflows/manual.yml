@@ -44,4 +44,3 @@ jobs:
       - name: Run LoginTest and generate report
         working-directory: ./test
         run: java -jar "../lib/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class st10228343.LoginTest
-
