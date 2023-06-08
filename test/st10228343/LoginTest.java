@@ -53,14 +53,14 @@ public void TaskDescriptionCheckerFailed() {
 
 @Test
 public void testCreateTaskID() {
- 
-Person person = new Person(taskName, description, time, status, devName);
- String taskName = "Login Feature";
-    String description = "Create Login to authenticate users";
-    String time = "8hrs";
-    String status = "To Do";
-    String devName = "Robyn Harrison";
-    String ID = "Lo:0:son";
+  String taskName = "Sample Task";
+        String description = "Sample Description";
+        int time = 60;
+        String status = "Pending";
+        String devName = "John Doe";
+
+        Person person = new Person(taskName, description, time, status, devName);
+
 
     String expectedTaskID = "Lo:0:son";
  
