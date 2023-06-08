@@ -20,7 +20,7 @@ jobs:
       - name: Compile classes
         working-directory: ./src
         run: |
-          javac -cp "../lib/junit-platform-console-standalone-1.6.0.jar" ./st10228343/ST10228343.java ./st10228343/Login.java ./st10228343/Tasks.java "../test/st10228343/LoginTest.java"
+          javac -cp "../lib/junit-platform-console-standalone-1.6.0.jar" ./st10228343/ST10228343.java ./st10228343/Login.java ./st10228343/Tasks.java ./st10228343/Person.java "../test/st10228343/LoginTest.java"
 
       - name: List contents of src directory after compile
         working-directory: ./src/st10228343
@@ -28,7 +28,7 @@ jobs:
 
       - name: Copy compiled classes to test resources directory
         working-directory: ./src/st10228343
-        run: cp -t "../../test/st10228343" ST10228343.class Login.class Tasks.class
+        run: cp -t "../../test/st10228343" ST10228343.class Login.class Tasks.class Person.class
 
       - name: Copy compiled test classes to test resources directory
         working-directory: ./test/st10228343
@@ -44,3 +44,4 @@ jobs:
       - name: Run LoginTest and generate report
         working-directory: ./test
         run: java -jar "../lib/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class st10228343.LoginTest
+
