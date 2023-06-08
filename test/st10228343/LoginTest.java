@@ -53,6 +53,8 @@ public void TaskDescriptionCheckerFailed() {
 
 @Test
 public void testCreateTaskID() {
+ 
+Person person = new Person(taskName, description, time, status, devName);
  String taskName = "Login Feature";
     String description = "Create Login to authenticate users";
     String time = "8hrs";
@@ -60,7 +62,6 @@ public void testCreateTaskID() {
     String devName = "Robyn Harrison";
     String ID = "Lo:0:son";
 
-    Person person = new Person(taskName, description, time, status, devName);
     String expectedTaskID = "Lo:0:son";
  
     String actualTaskID = person.getID();
