@@ -30,11 +30,11 @@ jobs:
         working-directory: ./src/st10228343
         run: cp -t "../../test/st10228343" Login.class Tasks.class
 
-      - name: Remove existing LoginTest.class in test resources directory
+      - name: Compile LoginTest class
         working-directory: ./test/st10228343
-        run: rm -f "../../test/st10228343/LoginTest.class"
+        run: javac -cp "../../lib/junit-platform-console-standalone-1.6.0.jar:../../src" LoginTest.java
 
-      - name: Copy compiled test classes to test resources directory
+      - name: Copy compiled test class to test resources directory
         working-directory: ./test/st10228343
         run: cp LoginTest.class "../../test/st10228343/LoginTest.class"
 
@@ -45,3 +45,4 @@ jobs:
       - name: Run LoginTest and generate report
         working-directory: ./test
         run: java -jar "../lib/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class st10228343.LoginTest
+
