@@ -6,9 +6,11 @@ package st10228343;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.jupiter.api.Assertions;
 
 
 
@@ -17,9 +19,9 @@ import org.junit.jupiter.api.Assertions;
  * @author Extinction
  */
 public class LoginTest {
+ 
     
-      
-      // Task 1
+    // Task 1
 String taskName1 = "Login Feature";
 String taskDescription1 = "Create Login to authenticate users";
 String developerDetails1 = "Robyn Harrison";
@@ -35,39 +37,37 @@ int taskDuration2 = 10;
 String taskStatus2 = "Doing";
     
 
+@Test    
+public void TaskDescriptionCheckerFailed() {
+    
+    String description = "Create Login to authenticate users";
+    int characterLimit = 50;
 
+    if (description.length() <= characterLimit) {
+        assertEquals(true, true); // Test passes if description length is within the limit
+    } else {
+        fail("Description length exceeds the character limit of 50 characters.");
+    }
+}
 
 
 @Test
 public void testCreateTaskID() {
-    String taskName = "Login Feature";
+ String taskName = "Login Feature";
     String description = "Create Login to authenticate users";
     String time = "8hrs";
     String status = "To Do";
     String devName = "Robyn Harrison";
-    String expectedTaskID = "Lo:0:son";
+    String ID = "Lo:0:son";
 
-    String actualTaskID = getTaskID(taskName, devName);
+    Person person = new Person(taskName, description, time, status, devName);
+    String expectedTaskID = "Lo:0:son";
+ 
+    String actualTaskID = person.getID();
 
     assertEquals(expectedTaskID, actualTaskID);
-    System.out.println(actualTaskID);
-}
-
-private String getTaskID(String taskName, String devName) {
-    int taskNumber = 0;
-    String taskNamePrefix = taskName.substring(0, Math.min(taskName.length(), 2));
-
-    String[] fullNameParts = devName.split(" ");
-    String developerSurname = "";
-    if (fullNameParts.length > 1) {
-        String surname = fullNameParts[fullNameParts.length - 1];
-        developerSurname = surname.substring(Math.max(surname.length() - 3, 0));
+       System.out.println(actualTaskID);
     }
-
-    StringBuilder displayer = new StringBuilder();
-    displayer.append(taskNamePrefix).append(":").append(taskNumber).append(":").append(developerSurname);
-    return displayer.toString();
-}
     
     // unit test for total duration of the loop 
  
@@ -91,9 +91,6 @@ private String getTaskID(String taskName, String devName) {
 
         assertEquals(expectedTotalDuration, actualTotalDuration);
     }
-    
-    
-    /// the private ints are methods used to make the test work testTotalDuration and testLastIterationOfLoop
 
     private int getLastIterationOfLoop(int numTasks, int[] durations) {
         int lastIteration = 0;
@@ -112,8 +109,6 @@ private String getTaskID(String taskName, String devName) {
         return totalDuration;
     }
 
-    
-    
 
       @Test
     public void TaskDescriptionCheckerSuccess() {
@@ -124,9 +119,9 @@ private String getTaskID(String taskName, String devName) {
         assertEquals(true, description.length() <= characterLimit);
     }
 
-    @Test    
-    public void TaskDescriptionCheckerfailed() {
-    String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
+@Test    
+public void TaskDescriptionChecker() {
+    String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
     int characterLimit = 50;
 
     assertEquals(true, description.length() > characterLimit); 
@@ -137,8 +132,6 @@ private String getTaskID(String taskName, String devName) {
     );
 }
        
-    /////////////////////////////////////////////////////////
-    
 
     
     @Test // tests if username is valid
@@ -308,7 +301,5 @@ private String getTaskID(String taskName, String devName) {
                   System.out.println(userPasswordMessage);
    
          }     
-    } 
-    
-    
+    }   
 }
