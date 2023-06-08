@@ -8,12 +8,71 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
 
 /**
  *
  * @author Extinction
  */
 public class LoginTest {
+    
+    // Task 1
+String taskName1 = "Login Feature";
+String taskDescription1 = "Create Login to authenticate users";
+String developerDetails1 = "Robyn Harrison";
+int taskDuration1 = 8;
+
+String taskStatus1 = "To Do";
+
+// Task 2
+String taskName2 = "Add Task Feature";
+String taskDescription2 = "Create Add Task feature to add task users";
+String developerDetails2 = "Mike Smith";
+int taskDuration2 = 10;
+String taskStatus2 = "Doing";
+    
+
+ @Test
+    public void testCheckTaskDescription() {
+        // Test with a valid description within the character limit
+        String validDescription = "This is a valid description.";
+        boolean isValid = Tasks.checkTaskDescription(validDescription);
+        Assertions.assertTrue(isValid);
+
+        // Test with an empty description
+        String emptyDescription = "";
+        isValid = Tasks.checkTaskDescription(emptyDescription);
+        Assertions.assertFalse(isValid);
+
+
+        // Test with a description exceeding the character limit
+        String longDescription = "This is a very long description that exceeds the allowed character limit.";
+        isValid = Tasks.checkTaskDescription(longDescription);
+        Assertions.assertFalse(isValid);
+    }
+
+
+
+
+@Test
+public void testCreateTaskID() {
+ String taskName = "Login Feature";
+    String description = "Create Login to authenticate users";
+    String time = "8hrs";
+    String status = "To Do";
+    String devName = "Robyn Harrison";
+    String ID = "Lo:0:son";
+
+    Person person = new Person(taskName, description, time, status, devName);
+    
+    String expectedTaskID = "Lo:0:son";
+ 
+    String actualTaskID = person.getID();
+  
+    assertEquals(expectedTaskID, actualTaskID);
+       System.out.println(actualTaskID);
+    }
+    
     // unit test for total duration of the loop 
  
        @Test // test for task 1 and 2 = 18hours total
@@ -36,6 +95,9 @@ public class LoginTest {
 
         assertEquals(expectedTotalDuration, actualTotalDuration);
     }
+    
+    
+    /// the private ints are methods used to make the test work testTotalDuration and testLastIterationOfLoop
 
     private int getLastIterationOfLoop(int numTasks, int[] durations) {
         int lastIteration = 0;
@@ -66,18 +128,20 @@ public class LoginTest {
         assertEquals(true, description.length() <= characterLimit);
     }
 
-@Test    
-       public void TaskDescriptionCheckerfailed() {
-        String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
-        int characterLimit = 50;
+    @Test    
+    public void TaskDescriptionCheckerfailed() {
+    String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
+    int characterLimit = 50;
 
-        if (description.length() <= characterLimit) {
-            assertEquals(true, true);
-        } else {
-            fail("Description length exceeds the character limit of 50 characters.");
-        }
-    }
+    assertEquals(true, description.length() > characterLimit); 
+
+
+    System.out.println("Description length exceeds the character limit of 50 characters."
+    +"\n"+"the amount of v was = "+description.length()
+    );
+}
        
+    /////////////////////////////////////////////////////////
 
     
     @Test // tests if username is valid
@@ -251,5 +315,3 @@ public class LoginTest {
     
     
 }
-
-
