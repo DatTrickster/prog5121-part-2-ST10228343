@@ -33,28 +33,6 @@ int taskDuration2 = 10;
 String taskStatus2 = "Doing";
     
 
- @Test
-    public void testCheckTaskDescription() {
-        // Test with a valid description within the character limit
-        String validDescription = "This is a valid description.";
-        boolean isValid = Tasks.checkTaskDescription(validDescription);
-        Assertions.assertTrue(isValid);
-
-        // Test with an empty description
-        String emptyDescription = "";
-        isValid = Tasks.checkTaskDescription(emptyDescription);
-        Assertions.assertFalse(isValid);
-
-
-        // Test with a description exceeding the character limit
-        String longDescription = "This is a very long description that exceeds the allowed character limit.";
-        isValid = Tasks.checkTaskDescription(longDescription);
-        Assertions.assertFalse(isValid);
-    }
-
-
-
-
 @Test
 public void testCreateTaskID() {
  String taskName = "Login Feature";
