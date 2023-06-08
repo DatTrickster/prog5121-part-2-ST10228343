@@ -1,26 +1,18 @@
-/*
+*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package st10228343;
 
-import java.util.regex.*;
-import javax.swing.Box;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-/**
- *
- * @author Extinction
- */
+
 public class Tasks {
-
+    
+    public String descrio;
+    
     public static void entry() {
-
         JOptionPane.showMessageDialog(null, "Welcome to EasyKanban");
         List<Person> userList = new ArrayList<>();
         boolean endProgram = false;
@@ -67,18 +59,32 @@ public class Tasks {
 
                     for (int i = 0; i < taskNum; i++) {
 
-                        String developerName = JOptionPane.showInputDialog("Development name");
+                        String developerName = JOptionPane.showInputDialog("Development name (format: Firstname Lastname)");
 
                         if (developerName == null) {
                             System.out.println("Cancel button clicked. Going back to the main menu.");
                             entry();
                             break;
                         }
-                        if (developerName.matches(".*\\d.*")) {
-                            JOptionPane.showMessageDialog(null, "Invalid input. Numeric values are not allowed.");
-                        }
+
                         if (developerName.isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Developer name cannot be blank.");
+                            i--; // Decrement i to repeat the current iteration
+                            continue;
+                        }
+
+                        String[] nameParts = developerName.split(" ");
+                        if (nameParts.length < 2) {
+                            JOptionPane.showMessageDialog(null, "Invalid input format. Please enter the full name (firstname lastname).");
+                            i--; // Decrement i to repeat the current iteration
+                            continue;
+                        }
+
+                        String firstName = nameParts[0];
+                        String lastName = nameParts[nameParts.length - 1];
+
+                        if (lastName.length() <= 4) {
+                            JOptionPane.showMessageDialog(null, "Surname should have more than 4 characters.");
                             i--; // Decrement i to repeat the current iteration
                             continue;
                         }
@@ -168,23 +174,23 @@ public class Tasks {
                     }
 
                     // Display the ArrayList
-                    StringBuilder Displayer = new StringBuilder();
+                    StringBuilder displayer = new StringBuilder();
                     double totalTime = 0;
                     int index = 1; // Counter variable for array index
                     for (Person user : userList) {
-                        Displayer.append("Task Number: ").append(index).append("\n"); // Display the array index
-                        Displayer.append("Task ID: ").append(user.getID()).append("\n");
-                        Displayer.append("Task Name: ").append(user.getTaskName()).append("\n");
-                        Displayer.append("Description: ").append(user.getDescription()).append("\n");
-                        Displayer.append("Time Allocation (Hours): ").append(user.getTime()).append("\n");
-                        Displayer.append("Status: ").append(user.getStatus()).append("\n");
-                        Displayer.append("---------------------------\n");
+                        displayer.append("Task Number: ").append(index).append("\n"); // Display the array index
+                        displayer.append("Task ID: ").append(user.getID()).append("\n");
+                        displayer.append("Task Name: ").append(user.getTaskName()).append("\n");
+                        displayer.append("Description: ").append(user.getDescription()).append("\n");
+                        displayer.append("Time Allocation (Hours): ").append(user.getTime()).append("\n");
+                        displayer.append("Status: ").append(user.getStatus()).append("\n");
+                        displayer.append("---------------------------\n");
 
                         totalTime += Double.parseDouble(user.getTime());
                         index++; // Increment the array index
                     }
-                    Displayer.append("Total Time: ").append(totalTime).append(" Hours");
-                    JOptionPane.showMessageDialog(null, Displayer.toString());
+                    displayer.append("Total Time: ").append(totalTime).append(" Hours");
+                    JOptionPane.showMessageDialog(null, displayer.toString());
                     continue;
                 }
 
@@ -216,7 +222,7 @@ public class Tasks {
             JOptionPane.showMessageDialog(null, "EXCEEDED number of characters allowed limit is 50");
             return false;
         } else {
-            JOptionPane.showMessageDialog(null, "in range of 50");
+            System.out.println("in range of 50");
             return true;
         }
     }
@@ -237,7 +243,6 @@ class Person {
         this.devName = devName;
     }
 
-
     public String getTaskName() {
         return taskName;
     }
@@ -249,7 +254,6 @@ class Person {
     public String getTime() {
         return time;
     }
-
 
     private static int currentTaskNumber = 0;
 
@@ -272,7 +276,6 @@ class Person {
         return displayer.toString();
     }
 
-
     public String getStatus() {
         return status;
     }
@@ -281,4 +284,3 @@ class Person {
         return devName;
     }
 }
-
