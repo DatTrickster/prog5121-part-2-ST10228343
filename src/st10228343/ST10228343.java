@@ -12,16 +12,18 @@ import javax.swing.JOptionPane;
  */
 public class ST10228343 {
 
-   
-   // START method contains all function to be launched
+ 
+ // START method contains all function to be launched
     
     
     public static void start() {
         
         
         
-             Login methods = new Login(); 
+             Login methods = new Login();
+             Tasks task=new Tasks();
         String name=methods.name;
+      
         //this method is used to run the other methods 
      methods.setName(name);
      methods.setSurname();
@@ -30,7 +32,7 @@ public class ST10228343 {
      String password=methods.getPassword();
      methods.setPassword(password);
      methods.confirm(username, password);
-     methods.entry();
+      task.entry();
        
     }
     
@@ -51,7 +53,8 @@ public class ST10228343 {
 
    
      
-    }
+    }  
+ 
     
 }
 
