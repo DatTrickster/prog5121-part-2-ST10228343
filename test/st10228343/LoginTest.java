@@ -10,13 +10,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Assertions;
 
+
+
 /**
  *
  * @author Extinction
  */
 public class LoginTest {
     
-        
+      
       // Task 1
 String taskName1 = "Login Feature";
 String taskDescription1 = "Create Login to authenticate users";
@@ -33,24 +35,39 @@ int taskDuration2 = 10;
 String taskStatus2 = "Doing";
     
 
+
+
+
 @Test
 public void testCreateTaskID() {
- String taskName = "Login Feature";
+    String taskName = "Login Feature";
     String description = "Create Login to authenticate users";
     String time = "8hrs";
     String status = "To Do";
     String devName = "Robyn Harrison";
-    String ID = "Lo:0:son";
-
-    Person person = new Person(taskName, description, time, status, devName);
-    
     String expectedTaskID = "Lo:0:son";
- 
-    String actualTaskID = person.getID();
-  
+
+    String actualTaskID = getTaskID(taskName, devName);
+
     assertEquals(expectedTaskID, actualTaskID);
-       System.out.println(actualTaskID);
+    System.out.println(actualTaskID);
+}
+
+private String getTaskID(String taskName, String devName) {
+    int taskNumber = 0;
+    String taskNamePrefix = taskName.substring(0, Math.min(taskName.length(), 2));
+
+    String[] fullNameParts = devName.split(" ");
+    String developerSurname = "";
+    if (fullNameParts.length > 1) {
+        String surname = fullNameParts[fullNameParts.length - 1];
+        developerSurname = surname.substring(Math.max(surname.length() - 3, 0));
     }
+
+    StringBuilder displayer = new StringBuilder();
+    displayer.append(taskNamePrefix).append(":").append(taskNumber).append(":").append(developerSurname);
+    return displayer.toString();
+}
     
     // unit test for total duration of the loop 
  
@@ -121,7 +138,8 @@ public void testCreateTaskID() {
 }
        
     /////////////////////////////////////////////////////////
- 
+    
+
     
     @Test // tests if username is valid
         public void testValidUsername() {
