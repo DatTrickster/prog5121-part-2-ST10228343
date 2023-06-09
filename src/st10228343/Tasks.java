@@ -11,11 +11,15 @@ import st10228343.Person;
 
 public class Tasks {
 
+// this is the array list that the object called Person will be pushed into 
+
     private List<Person> userList;
 
     public Tasks() {
         userList = new ArrayList<>();
     }
+
+// simple welcome method
 
     public void entry() {
         JOptionPane.showMessageDialog(null, "Welcome to EasyKanban");
@@ -65,6 +69,9 @@ public class Tasks {
             taskNumStr = JOptionPane.showInputDialog("How many tasks would you like (enter a numeric value)");
 
             if (taskNumStr == null) {
+
+// simply cancels an send back to menu 
+
                 System.out.println("Cancel button clicked. Going back to the main menu.");
                 entry();
                 break;
@@ -75,10 +82,14 @@ public class Tasks {
                 continue;
             }
 
-            // Check if the input is a valid numeric value
+         // Check if the input is a valid numeric value
+
             if (taskNumStr.matches("\\d+")) {
                 break;
             } else {
+
+
+//makes sure that this is a numeric value an not a string
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a numeric value for the task number.");
             }
         }
@@ -89,7 +100,10 @@ public class Tasks {
             String developerName = JOptionPane.showInputDialog("Developer name (format: Firstname Lastname)");
 
             if (developerName == null) {
-                System.out.println("Cancel button clicked. Going back to the main menu.");
+
+// simply cancels an send back to menu      
+
+          System.out.println("Cancel button clicked. Going back to the main menu.");
                 entry();
                 break;
             }
@@ -170,6 +184,9 @@ public class Tasks {
                 }
             }
 
+
+// stores my choices for the status
+
             Object[] statusOptions = {"Done", "Doing", "To Do"};
             int statusChoice = JOptionPane.showOptionDialog(
                     null,
@@ -183,6 +200,7 @@ public class Tasks {
             );
 
             String status;
+// case statement used to confirm the choice
 
             switch (statusChoice) {
                 case 0:
@@ -208,6 +226,9 @@ public class Tasks {
         double totalTime = 0;
         int index = 1; // Counter variable for array index
         for (Person user : userList) {
+
+// the string builder constructs all the information to be displayed in a joptionpane at the end
+
             displayer.append("Task Number: ").append(index).append("\n"); // Display the array index]
             displayer.append("developer name: ").append(user.getDevName()).append("\n"); // Display the array index]
             displayer.append("Task ID: ").append(user.getID()).append("\n");
@@ -219,6 +240,8 @@ public class Tasks {
 
             totalTime += Double.parseDouble(user.getTime());
             index++; // Increment the array index
+
+//add all the time also converts minutes to hours
         }
         displayer.append("Total Time: ").append(totalTime).append(" Hours");
         JOptionPane.showMessageDialog(null, displayer.toString());
@@ -236,6 +259,9 @@ public class Tasks {
         }
 
         if (description.length() > 50) {
+
+// simple check to see if the lengh6is more than 50
+
             JOptionPane.showMessageDialog(null, "EXCEEDED number of characters allowed limit is 50");
             return false;
         } else {
