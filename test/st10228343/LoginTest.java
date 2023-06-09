@@ -50,26 +50,20 @@ public void TaskDescriptionCheckerFailed() {
     }
 }
 
-
 @Test
 public void testCreateTaskID() {
- String taskName = "Login Feature";
+    String taskName = "Login Feature";
     String description = "Create Login to authenticate users";
     String time = "8hrs";
     String status = "To Do";
     String devName = "Robyn Harrison";
-    String ID = "Lo:0:son";
 
-        Person person = new Person(taskName, description, time, status, devName);
-
-
+    Person person = new Person(taskName, description, time, status, devName);
     String expectedTaskID = "Lo:0:son";
- 
     String actualTaskID = person.getID();
 
     assertEquals(expectedTaskID, actualTaskID);
-       
-    }
+}
     
     // unit test for total duration of the loop 
  
