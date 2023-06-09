@@ -48,21 +48,17 @@ public void TaskDescriptionCheckerFailed() {
     } else {
         fail("Description length exceeds the character limit of 50 characters.");
     }
-}
-
-
 @Test
 public void testCreateTaskID() {
-    String taskName = "Login Feature";
-    String description = "Create Login to authenticate users";
+    String taskName = "Show Feature";
+    String description = "Create a Show feature";
     String time = "8hrs";
     String status = "To Do";
     String devName = "Robyn Harrison";
-    String taskNumber = "2";
+    String taskNumber = "0";
 
-    String expectedTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(0, 3);
-
-    String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(0, 3);
+    String expectedTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
+    String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
 
     assertTrue(actualTaskID.equals(expectedTaskID));
     System.out.println(actualTaskID);
