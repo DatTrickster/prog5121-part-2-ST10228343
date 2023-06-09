@@ -4,6 +4,7 @@
  */
 package st10228343;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static org.junit.Assert.assertEquals;
@@ -50,36 +51,27 @@ public void TaskDescriptionCheckerFailed() {
     }
 }
 
+
 @Test
 public void testCreateTaskID() {
-    String taskName = "Login Feature";
+ String taskName = "Login Feature";
     String description = "Create Login to authenticate users";
     String time = "8hrs";
     String status = "To Do";
     String devName = "Robyn Harrison";
-    String expectedTaskID = "Lo:0:son";
+    String ID = "Lo:0:son";
 
-    String actualTaskID = getTaskID(taskName, devName);
+        Person person = new Person(taskName, description, time, status, devName);
+
+
+    String expectedTaskID = "Lo:0:son";
+ 
+    String actualTaskID = person.getID();
 
     assertEquals(expectedTaskID, actualTaskID);
-    System.out.println(actualTaskID);
-}
-
-private String getTaskID(String taskName, String devName) {
-    int taskNumber = 0;
-    String taskNamePrefix = taskName.substring(0, Math.min(taskName.length(), 2));
-
-    String[] fullNameParts = devName.split(" ");
-    String developerSurname = "";
-    if (fullNameParts.length > 1) {
-        String surname = fullNameParts[fullNameParts.length - 1];
-        developerSurname = surname.substring(Math.max(surname.length() - 3, 0));
+       System.out.println(actualTaskID);
     }
-
-    StringBuilder displayer = new StringBuilder();
-    displayer.append(taskNamePrefix).append(":").append(taskNumber).append(":").append(developerSurname);
-    return displayer.toString();
-
+    
     // unit test for total duration of the loop 
  
        @Test // test for task 1 and 2 = 18hours total
@@ -314,3 +306,5 @@ public void TaskDescriptionChecker() {
          }     
     }   
 }
+
+ 
