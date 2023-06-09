@@ -47,6 +47,7 @@ public class LoginTest {
     }
 
     // Test for creating task ID in the specified format
+
     @Test
     public void testCreateTaskID() {
         String taskName = "Show Feature";
@@ -62,7 +63,6 @@ public class LoginTest {
         assertTrue(actualTaskID.equals(expectedTaskID));
         System.out.println(actualTaskID);
     }
-
     // Test for calculating the last iteration of a loop based on number of tasks and durations
     @Test
     public void testLastIterationOfLoop() {
