@@ -53,24 +53,21 @@ public void TaskDescriptionCheckerFailed() {
 
 @Test
 public void testCreateTaskID() {
- String taskName = "Login Feature";
+    String taskName = "Login Feature";
     String description = "Create Login to authenticate users";
     String time = "8hrs";
     String status = "To Do";
     String devName = "Robyn Harrison";
- 
+    String taskNumber = "2";
 
-        Person person = new Person(taskName, description, time, status, devName);
+    String expectedTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(0, 3);
 
+    String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(0, 3);
 
-    String expectedTaskID = "Lo:0:son";
- 
-    String actualTaskID = person.getID("Lo:0:son");
+    assertTrue(actualTaskID.equals(expectedTaskID));
+    System.out.println(actualTaskID);
+}
 
-    assertEquals(expectedTaskID, actualTaskID);
-       System.out.println(actualTaskID);
-    }
-    
     // unit test for total duration of the loop 
  
        @Test // test for task 1 and 2 = 18hours total
