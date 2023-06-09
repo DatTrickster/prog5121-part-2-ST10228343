@@ -49,6 +49,8 @@ public void TaskDescriptionCheckerFailed() {
         fail("Description length exceeds the character limit of 50 characters.");
     }
 @Test
+ 
+ // checks to see if the actual = expected in the format ab:0:xyz
 public void testCreateTaskID() {
     String taskName = "Show Feature";
     String description = "Create a Show feature";
@@ -57,7 +59,7 @@ public void testCreateTaskID() {
     String devName = "Robyn Harrison";
     String taskNumber = "0";
 
-    String expectedTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
+    String expectedTaskID = "Lo:0:son"
     String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
 
     assertTrue(actualTaskID.equals(expectedTaskID));
@@ -110,15 +112,15 @@ public void testCreateTaskID() {
         String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
         // this contains 50 characters of dummy text
         int characterLimit = 50;
-        //will heck if the amount is <= to 50 which is the limit an output true 
+        //will check if the amount is <= to 50 which is the limit an output true 
         assertEquals(true, description.length() <= characterLimit);
     }
 
 @Test    
-public void TaskDescriptionChecker() {
+public void TaskDescriptionCheckerFailer() {
     String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
     int characterLimit = 50;
-
+// does the opposite of the test above check if limit is iexceeded
     assertEquals(true, description.length() > characterLimit); 
 
 
