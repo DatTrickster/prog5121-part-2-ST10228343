@@ -59,7 +59,7 @@ public void testCreateTaskID() {
     String devName = "Robyn Harrison";
     String taskNumber = "0";
 
-    String expectedTaskID = "Lo:0:son"
+    String expectedTaskID = "Lo:0:son";
     String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
 
     assertTrue(actualTaskID.equals(expectedTaskID));
