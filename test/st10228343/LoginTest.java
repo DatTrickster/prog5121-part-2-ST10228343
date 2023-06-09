@@ -58,14 +58,14 @@ public void testCreateTaskID() {
     String time = "8hrs";
     String status = "To Do";
     String devName = "Robyn Harrison";
-    String ID = "Lo:0:son";
+ 
 
         Person person = new Person(taskName, description, time, status, devName);
 
 
     String expectedTaskID = "Lo:0:son";
  
-    String actualTaskID = person.getID();
+    String actualTaskID = person.getID("Lo:0:son");
 
     assertEquals(expectedTaskID, actualTaskID);
        System.out.println(actualTaskID);
