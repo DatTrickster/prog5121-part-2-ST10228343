@@ -24,7 +24,7 @@ public class Login {
     public String name,surname,password,username;
 
 
-
+// 
 
 
     public void setName(String Name) {
@@ -59,6 +59,9 @@ public class Login {
          }
      
     }
+       //sets the username
+       
+      
     public boolean setUsername(String Username) {
   
         Username = JOptionPane.showInputDialog(null, "Set Username");
