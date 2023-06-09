@@ -68,7 +68,7 @@ public void testCreateTaskID() {
     String actualTaskID = person.getID();
 
     assertEquals(expectedTaskID, actualTaskID);
-       System.out.println(actualTaskID);
+       
     }
     
     // unit test for total duration of the loop 
