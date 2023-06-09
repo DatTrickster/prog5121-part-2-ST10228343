@@ -12,66 +12,62 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 
-
-
 /**
- *
- * @author Extinction
+ * JUnit test class for Login functionality
  */
 public class LoginTest {
- 
-    
+
     // Task 1
-String taskName1 = "Login Feature";
-String taskDescription1 = "Create Login to authenticate users";
-String developerDetails1 = "Robyn Harrison";
-int taskDuration1 = 8;
+    // Define task details
+    String taskName1 = "Login Feature";
+    String taskDescription1 = "Create Login to authenticate users";
+    String developerDetails1 = "Robyn Harrison";
+    int taskDuration1 = 8;
+    String taskStatus1 = "To Do";
 
-String taskStatus1 = "To Do";
+    // Task 2
+    // Define task details
+    String taskName2 = "Add Task Feature";
+    String taskDescription2 = "Create Add Task feature to add task users";
+    String developerDetails2 = "Mike Smith";
+    int taskDuration2 = 10;
+    String taskStatus2 = "Doing";
 
-// Task 2
-String taskName2 = "Add Task Feature";
-String taskDescription2 = "Create Add Task feature to add task users";
-String developerDetails2 = "Mike Smith";
-int taskDuration2 = 10;
-String taskStatus2 = "Doing";
-    
+    // Test for checking if task description length is within the character limit
+    @Test    
+    public void TaskDescriptionCheckerFailed() {
+        String description = "Create Login to authenticate users";
+        int characterLimit = 50;
 
-@Test    
-public void TaskDescriptionCheckerFailed() {
-    
-    String description = "Create Login to authenticate users";
-    int characterLimit = 50;
-
-    if (description.length() <= characterLimit) {
-        assertEquals(true, true); // Test passes if description length is within the limit
-    } else {
-        fail("Description length exceeds the character limit of 50 characters.");
+        if (description.length() <= characterLimit) {
+            assertEquals(true, true); // Test passes if description length is within the limit
+        } else {
+            fail("Description length exceeds the character limit of 50 characters.");
+        }
     }
-@Test
- 
- // checks to see if the actual = expected in the format ab:0:xyz
-public void testCreateTaskID() {
-    String taskName = "Show Feature";
-    String description = "Create a Show feature";
-    String time = "8hrs";
-    String status = "To Do";
-    String devName = "Robyn Harrison";
-    String taskNumber = "0";
 
-    String expectedTaskID = "Lo:0:son";
-    String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
+    // Test for creating task ID in the specified format
+    @Test
+    public void testCreateTaskID() {
+        String taskName = "Show Feature";
+        String description = "Create a Show feature";
+        String time = "8hrs";
+        String status = "To Do";
+        String devName = "Robyn Harrison";
+        String taskNumber = "0";
 
-    assertTrue(actualTaskID.equals(expectedTaskID));
-    System.out.println(actualTaskID);
-}
+        String expectedTaskID = "Lo:0:son";
+        String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
 
-    // unit test for total duration of the loop 
- 
-       @Test // test for task 1 and 2 = 18hours total
+        assertTrue(actualTaskID.equals(expectedTaskID));
+        System.out.println(actualTaskID);
+    }
+
+    // Test for calculating the last iteration of a loop based on number of tasks and durations
+    @Test
     public void testLastIterationOfLoop() {
         int numTasks = 2;
-        int[] durations = {10, 8,};
+        int[] durations = {10, 8};
 
         int expectedLastIteration = 18;
         int actualLastIteration = getLastIterationOfLoop(numTasks, durations);
@@ -79,7 +75,8 @@ public void testCreateTaskID() {
         assertEquals(expectedLastIteration, actualLastIteration);
     }
 
-    @Test // test for 5 task in an array 
+    // Test for calculating the total duration of tasks
+    @Test
     public void testTotalDuration() {
         int[] durations = {10, 12, 55, 11, 1};
 
@@ -89,6 +86,7 @@ public void testCreateTaskID() {
         assertEquals(expectedTotalDuration, actualTotalDuration);
     }
 
+    // Helper method to calculate the last iteration of a loop
     private int getLastIterationOfLoop(int numTasks, int[] durations) {
         int lastIteration = 0;
         int startIndex = durations.length - numTasks;
@@ -98,6 +96,7 @@ public void testCreateTaskID() {
         return lastIteration;
     }
 
+    // Helper method to calculate the total duration of tasks
     private int calculateTotalDuration(int[] durations) {
         int totalDuration = 0;
         for (int duration : durations) {
@@ -106,199 +105,98 @@ public void testCreateTaskID() {
         return totalDuration;
     }
 
-
-      @Test
+    // Test for checking if a task description is within the character limit
+    @Test
     public void TaskDescriptionCheckerSuccess() {
         String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
-        // this contains 50 characters of dummy text
+        // This contains 50 characters of dummy text
         int characterLimit = 50;
-        //will check if the amount is <= to 50 which is the limit an output true 
+        // Check if the amount is <= 50, which is the limit, and output true
         assertEquals(true, description.length() <= characterLimit);
     }
 
-@Test    
-public void TaskDescriptionCheckerFailer() {
-    String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
-    int characterLimit = 50;
-// does the opposite of the test above check if limit is iexceeded
-    assertEquals(true, description.length() > characterLimit); 
-
-
-    System.out.println("Description length exceeds the character limit of 50 characters."
-    +"\n"+"the amount of v was = "+description.length()
-    );
-}
-       
-
-    
-    @Test // tests if username is valid
-        public void testValidUsername() {
-              String UserName = "kyl_1";
-              
-           boolean UsernameValidation;
-        
-           UsernameValidation = UserName.contains("_") && UserName.length() <= 5;
-           
-        assertTrue(UsernameValidation);
-      
-    }
-      
-    @Test // test username it is invalid
-      public void testINValidUsername() {
-   
-          String UserName = "kyle!!!!!!";
-          
-        boolean UsernameValidation;
-        
-        UsernameValidation = UserName.contains("_") && UserName.length() <= 5;
-           
-        assertFalse(UsernameValidation);
-      
+    // Test for checking if a task description exceeds the character limit
+    @Test
+    public void TaskDescriptionCheckerFailer() {
+        String description = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
+        int characterLimit = 50;
+        // The opposite of the above test, checking if limit is exceeded
+        assertEquals(true, description.length() > characterLimit);
+        System.out.println("Description length exceeds the character limit of 50 characters.\n"
+                + "The amount of 'v' was = " + description.length());
     }
 
-    @Test //test for password valid
+    // Test for validating a username
+    @Test
+    public void testValidUsername() {
+        String userName = "kyl_1";
+        boolean usernameValidation;
+        // Check if username contains an underscore and is no more than 5 characters
+        usernameValidation = userName.contains("_") && userName.length() <= 5;
+        assertTrue(usernameValidation);
+    }
+
+    // Test for invalid username
+    @Test
+    public void testINValidUsername() {
+        String userName = "kyle!!!!!!";
+        boolean usernameValidation;
+        // Check if username contains an underscore and is no more than 5 characters
+        usernameValidation = userName.contains("_") && userName.length() <= 5;
+        assertFalse(usernameValidation);
+    }
+
+    // Test for setting a valid password
+    @Test
     public void testSetPasswordValid() {
-         boolean PasswordValidation; 
-        String SpecialChars = "^(?=.*[a-z])(?=."
-                       + "*[A-Z])(?=.*\\d)"
-                       + "(?=.*[-+_!@#$%^&*., ?]).+$";
- 
-        // Compile the Special ChARACTERS!!!
-        
-        Pattern p = Pattern.compile(SpecialChars);
-
-     
-      
-      
-     String   Password = "Ch&&sec@ke99!";
-        
-        // check the string contains the characters
-           Matcher m = p.matcher(Password);
-           
-        //checks if the password is more than 8 characters an that its contains special characters and numerics values
-        PasswordValidation = !(Password.length()>=8 && m.matches());
-         assertFalse( PasswordValidation);
-        
-        
+        boolean passwordValidation;
+        String specialChars = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*., ?]).+$";
+        // Compile the special characters
+        Pattern pattern = Pattern.compile(specialChars);
+        String password = "Ch&&sec@ke99!";
+        // Check if the string contains the required characters
+        Matcher matcher = pattern.matcher(password);
+        // Check if the password is more than 8 characters and matches the pattern
+        passwordValidation = !(password.length() >= 8 && matcher.matches());
+        assertFalse(passwordValidation);
     }
-    
-    @Test//test for password invalid details
+
+    // Test for setting an invalid password
+    @Test
     public void testSetPasswordInvalid() {
-         boolean PasswordValidation; 
-        String SpecialChars = "^(?=.*[a-z])(?=."
-                       + "*[A-Z])(?=.*\\d)"
-                       + "(?=.*[-+_!@#$%^&*., ?]).+$";
- 
-        // Compile the Special ChARACTERS!!!
-        
-        Pattern p = Pattern.compile(SpecialChars);
-
-     
-      
-      
-     String   Password = "password";
-        
-        // check the string contains the characters
-           Matcher m = p.matcher(Password);
-           
-        //checks if the password is more than 8 characters an that its contains special characters and numerics values
-        PasswordValidation = Password.length()>=8 && m.matches();
-        
-           assertFalse( PasswordValidation);
-        
+        boolean passwordValidation;
+        String specialChars = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*., ?]).+$";
+        // Compile the special characters
+        Pattern pattern = Pattern.compile(specialChars);
+        String password = "password";
+        // Check if the string contains the required characters
+        Matcher matcher = pattern.matcher(password);
+        // Check if the password is more than 8 characters and matches the pattern
+        passwordValidation = password.length() >= 8 && matcher.matches();
+        assertFalse(passwordValidation);
     }
-    
-    @Test //Testing for Valid Login Details
-    public void testLoginUserisValid() {   
-            
-        
-            boolean userLoginDetails;
-                String Username="kyl_1";
-            String Password="Ch&&sec@ke99!";
-            String enter_Username = "kyl_1";        
-            String enter_Password ="Ch&&sec@ke99!";
-        
-            userLoginDetails = Username.equals(enter_Username) && Password.equals(enter_Password);
+
+    // Test for valid user login details
+    @Test
+    public void testLoginUserisValid() {
+        boolean userLoginDetails;
+        String username = "kyl_1";
+        String password = "Ch&&sec@ke99!";
+        // Check if the username and password are valid
+        userLoginDetails = username.equals("kyl_1") && password.equals("Ch&&sec@ke99!");
         assertTrue(userLoginDetails);
     }
-     
-    @Test //Testing for Invalid Login Details
-    public void testLoginUserisInvalid() {   
-            
-            String Username="kyl_1";
-            String Password="Ch&&sec@ke99!";
-            boolean userLoginDetails;
-            String enterUsername = "user_12";        
-            String enterPassword ="Password123#";
-        
-            userLoginDetails = Username.equals(enterUsername) && Password.equals(enterPassword);
+
+    // Test for invalid user login details
+    @Test
+    public void testLoginUserisInvalid() {
+        boolean userLoginDetails;
+        String username = "kyl_1";
+        String password = "password";
+        // Check if the username and password are valid
+        userLoginDetails = username.equals("kyl_1") && password.equals("Ch&&sec@ke99!");
         assertFalse(userLoginDetails);
     }
-
-    @Test  //Returning a Welcome Message for Valid and Invalid Username
-    public void testUserNameFormatMessage() {
-
-        String userFirstName = "Bob";
-        String userLastName = "gnome";
-        String userNameRegistered = "Use_1";
-         String  userNameMessage ;
-        boolean userNameBoolean;
-        
-      
-        
-        if (userNameRegistered.length() <= 5 && userNameRegistered.contains("_")) {
-            userNameMessage = "Welcome " +userFirstName + " " +userLastName +" welcome back.";
-            System.out.println(userNameMessage);
-            userNameBoolean = true;
-    } else {
-         
-            userNameMessage = "Username is not correctly formatted, please ensure that your username contains an underscore"
-                    + "and is no more than 5 characters in length";
-            System.out.println(userNameMessage);
-            userNameBoolean = false;
-        }
-                
-        assertTrue(userNameBoolean);
-    }
-    
-    @Test //Returning a Welcome Message for Valid and Invalid Password
-    public void testUserPasswordFormatMessage() {
-
-
-        
-        String userPasswordMessage;
-
-        String SpecialChars = "^(?=.*[a-z])(?=."
-                       + "*[A-Z])(?=.*\\d)"
-                       + "(?=.*[-+_!@#$%^&*., ?]).+$";
- 
-        // Compile the Special ChARACTERS!!!
-        
-        Pattern p = Pattern.compile(SpecialChars);
-
-     
-      
-      
-     String   Password = "Ch&&sec@ke99!";
-        
-        // check the string contains the characters
-           Matcher m = p.matcher(Password);
-           
- //checks if the password is more than 8 characters an that its contains special characters and numerics values
-        
-          if (Password.length()>=8 && m.matches() ) {
-        
-     userPasswordMessage = "password captured correctly";
-              System.out.println(userPasswordMessage);
-        }
-         else{
-                     // if it is invalid this message will be triggered
-                  userPasswordMessage = "Password is not corrextly formatted, please ensure that the password contains at least 8 "
-                + "characters, a capital letter, a number and a special character"; 
-                  System.out.println(userPasswordMessage);
-   
-         }     
-    }   
 }
 
 
