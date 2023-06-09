@@ -48,21 +48,21 @@ public class LoginTest {
 
     // Test for creating task ID in the specified format
 
-    @Test
-    public void testCreateTaskID() {
-        String taskName = "Show Feature";
-        String description = "Create a Show feature";
-        String time = "8hrs";
-        String status = "To Do";
-        String devName = "Robyn Harrison";
-        String taskNumber = "0";
+@Test
+public void testCreateTaskID() {
+    String taskName = "Show Feature";
+    String description = "Create a Show feature";
+    String time = "8hrs";
+    String status = "To Do";
+    String devName = "Robyn Harrison";
+    String taskNumber = "0";
 
-        String expectedTaskID = "Lo:0:son";
-        String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
+    String expectedTaskID = "Sh:0:son"; // Updated expected task ID
+    String actualTaskID = taskName.substring(0, 2) + ":" + taskNumber + ":" + devName.substring(devName.length() - 3);
 
-        assertTrue(actualTaskID.equals(expectedTaskID));
-        System.out.println(actualTaskID);
-    }
+    assertEquals(expectedTaskID, actualTaskID);
+    System.out.println(actualTaskID);
+}
     // Test for calculating the last iteration of a loop based on number of tasks and durations
     @Test
     public void testLastIterationOfLoop() {
