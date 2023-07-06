@@ -275,26 +275,30 @@ public class Tasks {
     /**
      * Displays the tasks in the userList along with their details.
      */
-    private void displayTasks() {
-        StringBuilder displayer = new StringBuilder();
-        double totalTime = 0;
-        int index = 1; // Counter variable for array index
-        for (Person user : userList) {
-            displayer.append("Task Number: ").append(index).append("\n"); // Display the array index
-            displayer.append("Developer Name: ").append(user.getDevName()).append("\n"); // Display the developer name
-            displayer.append("Task ID: ").append(user.getID()).append("\n"); // Display the task ID
-            displayer.append("Task Name: ").append(user.getTaskName()).append("\n"); // Display the task name
-            displayer.append("Description: ").append(user.getDescription()).append("\n"); // Display the task description
-            displayer.append("Time Allocation (Hours): ").append(user.getTime()).append("\n"); // Display the time allocation
-            displayer.append("Status: ").append(user.getStatus()).append("\n"); // Display the status
-            displayer.append("---------------------------\n");
+  private void displayTasks() {
+    StringBuilder displayer = new StringBuilder();
+    double totalTime = 0;
+    int taskNum = 0; // Counter variable for task number
 
-            totalTime += Double.parseDouble(user.getTime());
-            index++; // Increment the array index
-        }
-        displayer.append("Total Time: ").append(totalTime).append(" Hours");
-        JOptionPane.showMessageDialog(null, displayer.toString());
+    for (Person user : userList) {
+        
+        displayer.append("Task Number: ").append(taskNum).append("\n"); // Display the task number
+        displayer.append("Developer Name: ").append(user.getDevName()).append("\n"); // Display the developer name
+        displayer.append("Task ID: ").append(user.getID()).append("\n"); // Display the task ID
+        displayer.append("Task Name: ").append(user.getTaskName()).append("\n"); // Display the task name
+        displayer.append("Description: ").append(user.getDescription()).append("\n"); // Display the task description
+        displayer.append("Time Allocation (Hours): ").append(user.getTime()).append("\n"); // Display the time allocation
+        displayer.append("Status: ").append(user.getStatus()).append("\n"); // Display the status
+        displayer.append("---------------------------\n");
+
+        totalTime += Double.parseDouble(user.getTime());
+        taskNum++; // Increment the task number
     }
+
+    displayer.append("Total Time: ").append(totalTime).append(" Hours");
+    JOptionPane.showMessageDialog(null, displayer.toString());
+}
+
 
     /**
      * Clears the tasks from the userList.
@@ -401,24 +405,27 @@ public class Tasks {
      *
      * @param developerName The name of the developer to search for.
      */
-    private void searchTasksByDeveloper(String developerName) {
-        boolean found = false;
-        StringBuilder displayer = new StringBuilder();
-        for (Person user : userList) {
-            if (user.getDevName().equalsIgnoreCase(developerName)) {
-                displayer.append("Task Name: ").append(user.getTaskName()).append("\n");
-                displayer.append("Task Status: ").append(user.getStatus()).append("\n");
-                displayer.append("---------------------------\n");
-                found = true;
-            }
-        }
+private void searchTasksByDeveloper(String developerName) {
+    StringBuilder displayer = new StringBuilder();
+    boolean foundTasks = false;
 
-        if (found) {
-            JOptionPane.showMessageDialog(null, displayer.toString());
-        } else {
-            JOptionPane.showMessageDialog(null, "No tasks found for the developer '" + developerName + "'.");
+    for (Person user : userList) {
+        if (user.getDevName().equalsIgnoreCase(developerName)) {
+            displayer.append("Task Name: ").append(user.getTaskName()).append("\n"); // Display the task name
+            displayer.append("Description: ").append(user.getDescription()).append("\n"); // Display the task description
+            displayer.append("Time Allocation (Hours): ").append(user.getTime()).append("\n"); // Display the time allocation
+            displayer.append("Status: ").append(user.getStatus()).append("\n"); // Display the status
+            displayer.append("---------------------------\n");
+            foundTasks = true;
         }
     }
+
+    if (foundTasks) {
+        JOptionPane.showMessageDialog(null, displayer.toString());
+    } else {
+        JOptionPane.showMessageDialog(null, "No tasks found for the developer: " + developerName);
+    }
+}
 
     /**
      * Deletes a task with the given Task Name.
