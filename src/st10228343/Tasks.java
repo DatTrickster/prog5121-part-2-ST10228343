@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package st10228343;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import st10228343.Person;
 
 public class Tasks {
     // ArrayList used to store the information of Person
@@ -26,12 +26,12 @@ public class Tasks {
 
         // Main welcome console. If the password and username are correct, it will display a welcome message and continue to the options panel.
         while (!endProgram) {
-            Object[] options = {"Add task", "Show report", "Quit"};
+            Object[] options = {"Add task", "Show report" ,"Clear List", "Quit",};
 
             // Simple button layout to allow the user to choose between adding a task, showing a report, or quitting.
             // The "Show report" option is still in development and will display a message indicating that it is not yet available.
             int choice = JOptionPane.showOptionDialog(null,
-                    "Select an option" + "\n" + "\n1. Add task" + "\n2. Show report" + "\n3. Quit",
+                    "Select an option" + "\n" + "\n1. Add task" + "\n2. Show report" +"\n3. clear"+ "\n4. Quit",
                     "Option Panel",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
@@ -45,15 +45,18 @@ public class Tasks {
                     System.out.println("Option 1 selected");
                     addTasks();
                     displayTasks();
-                    clearTasks();
+              
                     break;
 
                 case 1:
-                    System.out.println("Report currently in development");
-                    JOptionPane.showMessageDialog(null, "Feature still in development");
+                report();
                     break;
-
-                case 2:
+                 case 2:
+              clearTasks();
+              JOptionPane.showMessageDialog(null, "List Cleared");
+                    break;
+                    
+                case 3:
                     System.out.println("Program was ended");
                     endProgram = true;
                     System.out.println(endProgram);
@@ -65,6 +68,62 @@ public class Tasks {
             }
         }
     }
+    
+   public void report() {
+    boolean endreport = false;
+
+    while (!endreport) {
+        Object[] options = {"Filter by Duration", "Filter by Task Name", "Filter by Status (done)", "Delete Task",
+                            "Show Report", "Search Task by Developer", "Go Back"};
+
+        int choice = JOptionPane.showOptionDialog(null,
+                "Select an option or show full report",
+                "Option Panel",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        switch (choice) {
+            case 0:
+                System.out.println("Option 1 selected");
+                displayTaskWithLongestDuration();
+                break;
+
+            case 1:
+                String taskName = JOptionPane.showInputDialog("Enter the task name:");
+                searchTaskByName(taskName);
+                break;
+
+            case 2:
+                displayTasksWithStatusDone();
+                break;
+
+            case 3:
+                String taskToDelete = JOptionPane.showInputDialog("Enter the task name to delete:");
+                deleteTaskByName(taskToDelete);
+                break;
+
+            case 4:
+                displayFullTaskReport();
+                break;
+
+            case 5:
+                String developerName = JOptionPane.showInputDialog("Enter the developer name:");
+                searchTasksByDeveloper(developerName);
+                break;
+
+            case 6:
+                endreport = true;
+                entry();
+                break;
+
+            default:
+                System.out.println("No option selected");
+        }
+    }
+}
 
     /**
      * Prompts the user to enter task details and adds the tasks to the userList.
@@ -265,5 +324,144 @@ public class Tasks {
             return true;
         }
     }
-}
+    
+    
+    
+    
+    
+    private void displayTasksWithStatusDone() {
+        StringBuilder displayer = new StringBuilder();
+        for (Person user : userList) {
+            if (user.getStatus().equalsIgnoreCase("Done")) {
+                displayer.append("Developer: ").append(user.getDevName()).append("\n");
+                displayer.append("Task Name: ").append(user.getTaskName()).append("\n");
+                displayer.append("Task Duration: ").append(user.getTime()).append(" Hours").append("\n");
+                displayer.append("---------------------------\n");
+            }
+        }
 
+        if (displayer.length() > 0) {
+            JOptionPane.showMessageDialog(null, displayer.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No tasks found with the status 'Done'.");
+        }
+    }
+    
+    
+     /**
+     * Displays the Developer and Duration of the task with the longest duration.
+     */
+    private void displayTaskWithLongestDuration() {
+        double maxDuration = 0;
+        String developer = "";
+
+        for (Person user : userList) {
+            double duration = Double.parseDouble(user.getTime());
+            if (duration > maxDuration) {
+                maxDuration = duration;
+                developer = user.getDevName();
+            }
+        }
+
+        if (maxDuration > 0) {
+            JOptionPane.showMessageDialog(null, "Developer with longest duration: " + developer +
+                    "\nTask Duration: " + maxDuration + " Hours");
+        } else {
+            JOptionPane.showMessageDialog(null, "No tasks found.");
+        }
+    }
+
+    /**
+     * Search for a task with a given Task Name and display the Task Name, Developer, and Task Status.
+     *
+     * @param taskName The name of the task to search for.
+     */
+    private void searchTaskByName(String taskName) {
+        boolean found = false;
+        StringBuilder displayer = new StringBuilder();
+        for (Person user : userList) {
+            if (user.getTaskName().equalsIgnoreCase(taskName)) {
+                displayer.append("Task Name: ").append(user.getTaskName()).append("\n");
+                displayer.append("Developer: ").append(user.getDevName()).append("\n");
+                displayer.append("Task Status: ").append(user.getStatus()).append("\n");
+                displayer.append("---------------------------\n");
+                found = true;
+            }
+        }
+
+        if (found) {
+            JOptionPane.showMessageDialog(null, displayer.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No task found with the name '" + taskName + "'.");
+        }
+    }
+
+    /**
+     * Search for all tasks assigned to a given developer and display the Task Name and Task Status.
+     *
+     * @param developerName The name of the developer to search for.
+     */
+    private void searchTasksByDeveloper(String developerName) {
+        boolean found = false;
+        StringBuilder displayer = new StringBuilder();
+        for (Person user : userList) {
+            if (user.getDevName().equalsIgnoreCase(developerName)) {
+                displayer.append("Task Name: ").append(user.getTaskName()).append("\n");
+                displayer.append("Task Status: ").append(user.getStatus()).append("\n");
+                displayer.append("---------------------------\n");
+                found = true;
+            }
+        }
+
+        if (found) {
+            JOptionPane.showMessageDialog(null, displayer.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No tasks found for the developer '" + developerName + "'.");
+        }
+    }
+
+    /**
+     * Deletes a task with the given Task Name.
+     *
+     * @param taskName The name of the task to delete.
+     */
+    private void deleteTaskByName(String taskName) {
+        boolean found = false;
+        for (Person user : userList) {
+            if (user.getTaskName().equalsIgnoreCase(taskName)) {
+                userList.remove(user);
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            JOptionPane.showMessageDialog(null, "Task '" + taskName + "' deleted successfully.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No task found with the name '" + taskName + "'.");
+        }
+    }
+
+    /**
+     * Displays a report that lists the full details of all captured tasks.
+     */
+    private void displayFullTaskReport() {
+        StringBuilder displayer = new StringBuilder();
+        for (Person user : userList) {
+            displayer.append("Developer Name: ").append(user.getDevName()).append("\n");
+            displayer.append("Task ID: ").append(user.getID()).append("\n");
+            displayer.append("Task Name: ").append(user.getTaskName()).append("\n");
+            displayer.append("Task Description: ").append(user.getDescription()).append("\n");
+            displayer.append("Task Duration: ").append(user.getTime()).append("\n");
+            displayer.append("Task Status: ").append(user.getStatus()).append("\n");
+            displayer.append("---------------------------\n");
+        }
+
+        if (displayer.length() > 0) {
+            JOptionPane.showMessageDialog(null, displayer.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No tasks found.");
+        }
+    }
+    
+}
