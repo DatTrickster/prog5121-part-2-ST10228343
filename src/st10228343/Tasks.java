@@ -71,7 +71,9 @@ public class Tasks {
     
    public void report() {
     boolean endreport = false;
-
+/* This method allows the user to select a filter option, ranging from filtering by status, Task name, and developer. The user will
+This method allows allows the user to review the full report or delete tasks from array
+*/
     while (!endreport) {
         Object[] options = {"Filter by Duration", "Filter by Task Name", "Filter by Status (done)", "Delete Task",
                             "Show Report", "Search Task by Developer", "Go Back"};
@@ -432,7 +434,9 @@ private void searchTasksByDeveloper(String developerName) {
      *
      * @param taskName The name of the task to delete.
      */
+          // this method is used to delete items by name located at the array's index
     private void deleteTaskByName(String taskName) {
+  
         boolean found = false;
         for (Person user : userList) {
             if (user.getTaskName().equalsIgnoreCase(taskName)) {
@@ -453,6 +457,7 @@ private void searchTasksByDeveloper(String developerName) {
      * Displays a report that lists the full details of all captured tasks.
      */
     private void displayFullTaskReport() {
+// generates the entire report
         StringBuilder displayer = new StringBuilder();
         for (Person user : userList) {
             displayer.append("Developer Name: ").append(user.getDevName()).append("\n");
@@ -463,7 +468,7 @@ private void searchTasksByDeveloper(String developerName) {
             displayer.append("Task Status: ").append(user.getStatus()).append("\n");
             displayer.append("---------------------------\n");
         }
-
+// if the array is empty, it will check to see if it is greater than 0
         if (displayer.length() > 0) {
             JOptionPane.showMessageDialog(null, displayer.toString());
         } else {
