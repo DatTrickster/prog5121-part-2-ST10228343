@@ -33,7 +33,8 @@ public class ST10228343 {
      methods.setPassword(password);
      methods.confirm(username, password);
 
-// part 2 starts here 
+//  Part 2 starts here 
+ // Part 3 also happens in this class
      task.entry();
        
     }
